@@ -103,6 +103,3 @@ func Rr(a, b Stack) {
 	b.Rb()
 	a.Ra()
 }
-
-
-
