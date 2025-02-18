@@ -40,6 +40,29 @@ func (s *Stack) Pop() *Node {
 
 }
 
+func (s *Stack) MaxMin() (*Node, int, *Node,int) {
+	pointer := s.Head
+	min := pointer
+	max := pointer
+	index := 0
+	midx := 0
+	madx := 0
+	for pointer != nil {
+		if pointer.Value < min.Value {
+			min = pointer
+			midx = index
+		}
+		if pointer.Value > max.Value {
+			max = pointer
+			madx = index
+		}
+		pointer = pointer.Next
+		index++
+	}
+	return min,midx,max, madx
+}
+
+
 func (s *Stack) Print() {
 	pointer := s.Head
 	for pointer != nil {
@@ -102,4 +125,31 @@ func (b *Stack) Rb() {
 func Rr(a, b Stack) {
 	b.Rb()
 	a.Ra()
+}
+
+func (a *Stack) Rra() {
+	node := a.Head
+	for node.Next.Next != nil {
+		node = node.Next
+	}
+	last := node.Next
+	last.Next = a.Head
+	node.Next = nil
+	a.Head = last
+}
+
+func (b *Stack) Rrb() {
+	node := b.Head
+	for node.Next.Next != nil {
+		node = node.Next
+	}
+	last := node.Next
+	last.Next = b.Head
+	node.Next = nil
+	b.Head = last
+}
+
+func Rrr(a, b Stack) {
+	a.Rra()
+	b.Rrb()
 }

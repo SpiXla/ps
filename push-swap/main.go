@@ -1,20 +1,17 @@
 package main
 
 import (
-	"fmt"
 	stack "pushswap/internal"
 )
 
 func main() {
-	n := stack.Stack{}
-	n.Push(4)
-	n.Push(2)
-	n.Push(1)
-	n.Print()
-	fmt.Println("---------")
-	n.Sa()
-	n.Print()
-	fmt.Println("---------")
-	n.Ra()
-	n.Print()
+	s := stack.Stack{}
+	s.Push(8)
+	s.Push(5)
+	s.Push(6)
+	s.Push(3)
+	s.Push(1)
+	s.Push(2)
+
+	s.Print()
 }
