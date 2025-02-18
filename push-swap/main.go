@@ -2,22 +2,19 @@ package main
 
 import (
 	"fmt"
-	"os"
-
-	"funcs/push-swap/funcs"
+	stack "pushswap/internal"
 )
 
 func main() {
-	if len(os.Args) != 2 {
-		return
-	}
-	funcs.Sorting()
-	for _, r := range funcs.Instructions {
-		fmt.Println(r)
-	}
-
-	// funcs.PushB()
-
-	fmt.Println("stackA:",funcs.StackA)
-	fmt.Println("stackB:",funcs.StackB)
+	n := stack.Stack{}
+	n.Push(4)
+	n.Push(2)
+	n.Push(1)
+	n.Print()
+	fmt.Println("---------")
+	n.Sa()
+	n.Print()
+	fmt.Println("---------")
+	n.Ra()
+	n.Print()
 }
