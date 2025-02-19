@@ -1,36 +1,56 @@
 package stack
 
-import "fmt"
-
-func Solver(a, b *Stack) {
-	mid := a.length / 2
+func Solver(a, b *Stack) []string {
+	solution := []string{}
+	mid := a.Length / 2
 	// pointer := a.Head
-	for a.length > mid {
-		_, index := a.Min()
-		if index == 0 {
+	for a.Length > 0 {
+		if a.IsAsc(0, a.Length-1) && b.IsDsc(0, b.Length-1) {
+			break
+		}
+		if a.Min() == 0 {
+			b.Pb(a)
+			solution = append(solution, "pb")
+			continue
+		}
+		if a.Min() == 1 {
+			if b.Max() == 1 {
+				solution = append(solution, "ss")
+				Ss(a, b)
+			} else {
+				solution = append(solution, "sa")
+				a.Sa()
+			}
+			solution = append(solution, "pb")
 			b.Pb(a)
 			continue
 		}
-		if index == 1 {
-			a.Sa()
-			b.Pb(a)
+		if a.Min() <= mid {
+			if a.Max() == 0 && b.Min() == 0 {
+				solution = append(solution, "rr")
+				Rr(a, b)
+			} else {
+			solution = append(solution, "ra")
+				a.Ra()
+			}
 			continue
 		}
-		if index <= mid {
-			a.Ra()
-			continue
-		}
-		if index > mid {
-			a.Rra()
+		if a.Min() > mid {		
+			if a.Min() == 0 && b.Max() == 0 {
+				solution = append(solution, "rrr")
+				Rrr(a, b)
+			} else {
+				solution = append(solution, "rra")
+				a.Rra()
+			}
 			continue
 		}
 
 	}
+	for b.Length > 0 {
+		solution = append(solution, "pa")
+		a.Pa(b)
+	}
 
-	
-
-	fmt.Println("hthhghghhh")
-	a.Print()
-	fmt.Println("hthhghghhh")
-	b.Print()
+	return solution
 }

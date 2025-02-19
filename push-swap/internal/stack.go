@@ -9,7 +9,7 @@ type Node struct {
 
 type Stack struct {
 	Head   *Node
-	length int
+	Length int
 }
 
 func (s *Stack) Push(value int) {
@@ -19,11 +19,11 @@ func (s *Stack) Push(value int) {
 	}
 	if s.Head == nil {
 		s.Head = &newNode
-		s.length++
+		s.Length++
 	} else {
 		newNode.Next = s.Head
 		s.Head = &newNode
-		s.length++
+		s.Length++
 	}
 }
 
@@ -35,11 +35,11 @@ func (s *Stack) Pop() *Node {
 	ptr := s.Head.Next
 	s.Head.Next = nil
 	s.Head = ptr
-	s.length--
+	s.Length--
 	return node
 }
 
-func (s *Stack) Min() (*Node, int) {
+func (s *Stack) Min() int {
 	pointer := s.Head
 	min := pointer
 	index := 0
@@ -52,10 +52,10 @@ func (s *Stack) Min() (*Node, int) {
 		pointer = pointer.Next
 		index++
 	}
-	return min, midx
+	return midx
 }
 
-func (s *Stack) Max() (*Node, int) {
+func (s *Stack) Max() int {
 	pointer := s.Head
 	max := pointer
 	index := 0
@@ -68,7 +68,51 @@ func (s *Stack) Max() (*Node, int) {
 		pointer = pointer.Next
 		index++
 	}
-	return max, madx
+	return madx
+}
+
+func (s *Stack) IsAsc(start, end int) bool {
+	index := 0
+	reach := false
+	pointer := s.Head
+	for pointer != nil {
+		if index == end {
+			break
+		}
+		if index == start {
+			reach = true
+		}
+		if reach {
+			if pointer.Value > pointer.Next.Value {
+				return false
+			}
+		}
+		pointer = pointer.Next
+		index++
+	}
+	return true
+}
+
+func (s *Stack) IsDsc(start, end int) bool {
+	index := 0
+	reach := false
+	pointer := s.Head
+	for pointer != nil {
+		if index == end {
+			break
+		}
+		if index == start {
+			reach = true
+		}
+		if reach {
+			if pointer.Value < pointer.Next.Value {
+				return false
+			}
+		}
+		pointer = pointer.Next
+		index++
+	}
+	return true
 }
 
 func (s *Stack) Print() {
@@ -77,4 +121,6 @@ func (s *Stack) Print() {
 		fmt.Println(pointer.Value)
 		pointer = pointer.Next
 	}
+	fmt.Println("==")
+	fmt.Println("stack")
 }
