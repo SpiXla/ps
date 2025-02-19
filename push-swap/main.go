@@ -14,4 +14,7 @@ func main() {
 	s.Push(2)
 
 	s.Print()
+	b := stack.Stack{}
+	stack.Solver(&s,&b)
+	
 }
