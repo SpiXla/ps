@@ -8,6 +8,7 @@ type Node struct {
 }
 
 type Stack struct {
+	Name   string
 	Head   *Node
 	Length int
 }
@@ -40,6 +41,9 @@ func (s *Stack) Pop() *Node {
 }
 
 func (s *Stack) Min() int {
+	if s.Length == 0 {
+		return -1
+	}
 	pointer := s.Head
 	min := pointer
 	index := 0
@@ -56,6 +60,9 @@ func (s *Stack) Min() int {
 }
 
 func (s *Stack) Max() int {
+	if s.Length == 0 {
+		return -1
+	}
 	pointer := s.Head
 	max := pointer
 	index := 0
@@ -72,6 +79,9 @@ func (s *Stack) Max() int {
 }
 
 func (s *Stack) IsAsc(start, end int) bool {
+	if s.Length <= 0 {
+		return true
+	}
 	index := 0
 	reach := false
 	pointer := s.Head
@@ -94,6 +104,9 @@ func (s *Stack) IsAsc(start, end int) bool {
 }
 
 func (s *Stack) IsDsc(start, end int) bool {
+	if s.Length <= 1 {
+		return false
+	}
 	index := 0
 	reach := false
 	pointer := s.Head
@@ -116,11 +129,13 @@ func (s *Stack) IsDsc(start, end int) bool {
 }
 
 func (s *Stack) Print() {
+	fmt.Println("stack",s.Name)
+	fmt.Println("=====")
 	pointer := s.Head
 	for pointer != nil {
 		fmt.Println(pointer.Value)
 		pointer = pointer.Next
 	}
-	fmt.Println("==")
-	fmt.Println("stack")
+	fmt.Println("=====")
+	
 }

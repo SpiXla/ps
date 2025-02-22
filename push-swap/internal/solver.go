@@ -4,10 +4,7 @@ func Solver(a, b *Stack) []string {
 	solution := []string{}
 	mid := a.Length / 2
 	// pointer := a.Head
-	for a.Length > 0 {
-		if a.IsAsc(0, a.Length-1) && b.IsDsc(0, b.Length-1) {
-			break
-		}
+	for !a.IsAsc(0, a.Length-1) {
 		if a.Min() == 0 {
 			b.Pb(a)
 			solution = append(solution, "pb")
@@ -30,12 +27,12 @@ func Solver(a, b *Stack) []string {
 				solution = append(solution, "rr")
 				Rr(a, b)
 			} else {
-			solution = append(solution, "ra")
+				solution = append(solution, "ra")
 				a.Ra()
 			}
 			continue
 		}
-		if a.Min() > mid {		
+		if a.Min() > mid {
 			if a.Min() == 0 && b.Max() == 0 {
 				solution = append(solution, "rrr")
 				Rrr(a, b)
@@ -45,12 +42,13 @@ func Solver(a, b *Stack) []string {
 			}
 			continue
 		}
-
+		if a.IsAsc(0, a.Length-1) && b.IsDsc(0, b.Length-1) {
+			break
+		}
 	}
 	for b.Length > 0 {
 		solution = append(solution, "pa")
 		a.Pa(b)
 	}
-
 	return solution
 }
