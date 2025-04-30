@@ -3,10 +3,13 @@ package stack
 func Solver(a, b *Stack) []string {
 	solution := []string{}
 	mid := a.Length / 2
-	// pointer := a.Head
 	for a.Length > 0 {
 		if a.Length == 3 {
 			solveThree(a, &solution)
+			break
+		}
+		if a.Length == 5 {
+			solveFive(a,b, &solution)
 			break
 		}
 		if a.Min() == 0 {
@@ -88,8 +91,41 @@ func solveThree(a *Stack, sol *[]string) {
 }
 
 func solveFive(a,b *Stack, sol *[]string) {
-	b.Pb(a)
-	b.Pb(a)
+	for a.Length > 3 {
+		if a.Min() == 0 || a.Max() == 0 {
+			b.Pb(a)
+			*sol = append(*sol, "pb")
+		}else if a.Min() == 1 || a.Max() == 1 {
+			a.Sa()
+			b.Pb(a)
+			*sol = append(*sol, "sa")
+			*sol = append(*sol, "pb")
+		} else if a.Min() == a.Length || a.Max() == a.Length {
+			a.Rra()
+			b.Pb(a)
+			*sol = append(*sol, "rra")
+			*sol = append(*sol, "pb")
+		}else {
+			a.Rra()
+			*sol = append(*sol, "rra")
+		}
+	}
 	solveThree(a,sol)
-	
+	emptyB(a,b,sol)
+
+}
+
+func emptyB(a,b *Stack,sol *[]string) {
+	a.Pa(b)
+	*sol = append(*sol, "pa")
+	if a.Max() == 0 {
+		a.Ra()
+		*sol = append(*sol, "ra")
+	}
+	a.Pa(b)
+	*sol = append(*sol, "pa")
+	if a.Max() == 0 {
+		a.Ra()
+		*sol = append(*sol, "ra")
+	}
 }

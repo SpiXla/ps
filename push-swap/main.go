@@ -15,12 +15,14 @@ func main() {
 	// 	r := int(rand.Float64() * 10)
 	// 	a.Push(r * n[r%2])
 	// }
-	a.Push(1)
-	a.Push(8)
+	a.Push(3)
 	a.Push(5)
 	a.Push(6)
 	a.Push(2)
-	a.Push(3)
+	a.Push(1)
+
+	
+	// a.Push(1)
 	// a.Push(12)
 	// a.Push(17)
 	// a.Push(14)
